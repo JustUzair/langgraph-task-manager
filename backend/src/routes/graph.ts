@@ -1,5 +1,5 @@
 import express from "express";
-import graphController from "../../controllers/graph";
+import graphController from "../controllers/graph/index.js";
 
 const router = express.Router();
 

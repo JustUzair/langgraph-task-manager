@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Model, makeModel } from "../../utils/model";
-import { State } from "../types";
+import { Model, makeModel } from "../../utils/model.js";
+import { State } from "../types.js";
 
 const NotesSchema = z.object({
   notes: z.array(z.string().min(1).max(500)).min(1).max(20),

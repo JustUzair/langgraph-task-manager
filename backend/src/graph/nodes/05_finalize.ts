@@ -1,4 +1,4 @@
-import type { State } from "../types";
+import type { State } from "../types.js";
 
 export async function FinalizeNode(state: State): Promise<Partial<State>> {
   const approved = state.approved ?? false;

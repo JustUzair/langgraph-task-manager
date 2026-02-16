@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import type { State } from "../types";
-import { Model, makeModel } from "../../utils/model";
+import type { State } from "../types.js";
+import { Model, makeModel } from "../../utils/model.js";
 
 const PlanSchema = z.object({
   steps: z

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { StartSchema, ApproveSchema } from "./types";
-import { runResumeAgent, runStartAgent } from "../../graph/graph";
+import { StartSchema, ApproveSchema } from "./types.js";
+import { runResumeAgent, runStartAgent } from "../../graph/graph.js";
 
 export default {
   startGraph: async function (

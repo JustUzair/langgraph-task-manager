@@ -1,7 +1,7 @@
 import { ChatGroq } from "@langchain/groq";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatOpenAI } from "@langchain/openai";
-import { env } from "./env";
+import { env } from "./env.js";
 
 export type Model = ChatGoogleGenerativeAI | ChatGroq | ChatOpenAI;
 

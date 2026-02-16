@@ -1,5 +1,5 @@
 import { interrupt } from "@langchain/langgraph";
-import type { State } from "../types";
+import type { State } from "../types.js";
 
 export async function ApproveNode(
   state: State,

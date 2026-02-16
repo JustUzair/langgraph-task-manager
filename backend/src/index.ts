@@ -1,6 +1,6 @@
 import rateLimit from "express-rate-limit";
 import express from "express";
-import AgentRouter from "./routes/graph";
+import AgentRouter from "./routes/graph.js";
 import cors from "cors";
 
 const limiter = rateLimit({

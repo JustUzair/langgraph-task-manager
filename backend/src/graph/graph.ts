@@ -6,12 +6,12 @@ import {
   START,
   StateGraph,
 } from "@langchain/langgraph";
-import { ValidateNode } from "./nodes/01_validate";
-import { PlanNode } from "./nodes/02_plan";
-import { ApproveNode } from "./nodes/03_approve";
-import { ExecuteNode } from "./nodes/04_execute";
-import { FinalizeNode } from "./nodes/05_finalize";
-import { makeInitialState, State } from "./types";
+import { ValidateNode } from "./nodes/01_validate.js";
+import { PlanNode } from "./nodes/02_plan.js";
+import { ApproveNode } from "./nodes/03_approve.js";
+import { ExecuteNode } from "./nodes/04_execute.js";
+import { FinalizeNode } from "./nodes/05_finalize.js";
+import { makeInitialState, State } from "./types.js";
 
 const StateAnnotation = Annotation.Root({
   input: Annotation<string>,
