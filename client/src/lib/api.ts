@@ -1,7 +1,9 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+import { State } from "./types";
 
-export async function startAgent(input: string) {
-  const res = await fetch(`${BASE}/agent`, {
+const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+export async function runStartAgent(input: string) {
+  const res = await fetch(`${BASE}/api/v1/agent`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +18,7 @@ export async function startAgent(input: string) {
     data?:
       | { kind: "final"; final: any }
       | {
-          kind: "needs_approval";
+          kind: "interrupt";
           interrupt: {
             threadId: string;
             steps: string[];
@@ -27,8 +29,8 @@ export async function startAgent(input: string) {
   }>;
 }
 
-export async function approveAgent(threadId: string, approve: boolean) {
-  const res = await fetch(`${BASE}/agent/approve`, {
+export async function runApproveAgent(threadId: string, approve: boolean) {
+  const res = await fetch(`${BASE}/api/v1/agent/approve`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +42,7 @@ export async function approveAgent(threadId: string, approve: boolean) {
 
   return res.json() as Promise<{
     status: "ok" | "error";
-    data?: { kind: "final"; final: any };
+    data?: { kind: "final"; final: Partial<State> };
     error?: string;
   }>;
 }
