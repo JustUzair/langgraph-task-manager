@@ -38,20 +38,33 @@ export async function PlanNode(state: State): Promise<Partial<State>> {
   if (state.status == "cancelled") return {};
   const model: Model = makeModel();
   const structured = model.withStructuredOutput(PlanSchema);
-  const plan = await structured.invoke([
-    {
-      role: "system",
-      content: System,
-    },
-    {
-      role: "human",
-      content: userPrompt(state.input),
-    },
-  ]);
 
-  const steps = takeFirstN(plan.steps, 10);
-  return {
-    steps,
-    status: "planned",
-  };
+  try {
+    const plan = await structured.invoke(
+      [
+        {
+          role: "system",
+          content: System,
+        },
+        {
+          role: "human",
+          content: userPrompt(state.input),
+        },
+      ],
+      {
+        timeout: 10000,
+      },
+    );
+    console.log(plan);
+
+    const steps = takeFirstN(plan.steps, 10);
+    return {
+      steps,
+      status: "planned",
+    };
+  } catch (e) {
+    console.error("PlanNode Error:", e);
+    // Return a failed state so the UI knows to stop loading
+    return { status: "error" as any };
+  }
 }
