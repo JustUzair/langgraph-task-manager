@@ -57,31 +57,31 @@ app.all("*", (req, res, next) => {
   next(new Error(`URL ${req.originalUrl} does not exist on this server !!!`));
 });
 
-const port = process.env.PORT || 8000;
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}`);
-});
-
-process.on("unhandledRejection", (err: Error) => {
-  console.log(err.name, err.message);
-  server.close(() => {
-    process.exit(1);
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 8000;
+  const server = app.listen(port, () => {
+    console.log(`App running on port ${port}`);
   });
-});
-
-/*  
+  process.on("unhandledRejection", (err: Error) => {
+    console.log(err.name, err.message);
+    server.close(() => {
+      process.exit(1);
+    });
+  });
+  /*  
     |----------------------------------------------------------------------|
     |   SIGTERM is a signal that is sent to request the process terminates |
     |   that were rejected whose rejections have not yet been handled.     |  
     |   In other words, it is used for graceful shutdown of server.        |
     |----------------------------------------------------------------------|
 */
-process.on("SIGTERM", () => {
-  // SIGTERM - signal fired when Heroku dynos restart
-  console.log("SIGTERM RECEIVED! Shutting Down gracefully!");
-  server.close(() => {
-    console.log("Process Terminated");
+  process.on("SIGTERM", () => {
+    // SIGTERM - signal fired when Heroku dynos restart
+    console.log("SIGTERM RECEIVED! Shutting Down gracefully!");
+    server.close(() => {
+      console.log("Process Terminated");
+    });
   });
-});
+}
 
 export default app;
