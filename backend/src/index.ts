@@ -1,6 +1,7 @@
 import rateLimit from "express-rate-limit";
 import express from "express";
-import graphRouter from "./routes/graph";
+import AgentRouter from "./routes/graph";
+import cors from "cors";
 
 const limiter = rateLimit({
   limit: 100,
@@ -19,8 +20,18 @@ const limiter = rateLimit({
     });
   },
 });
+
+// 🛜 Initializing the Server
 const app = express();
 app.enable("trust proxy");
+app.use(
+  cors({
+    origin: process.env.FRONTEND_ORIGIN || "http://localhost:3000",
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+    credentials: false,
+  }),
+);
 
 app.use("/api", limiter);
 
@@ -39,7 +50,7 @@ app.use(
   }),
 );
 
-app.use("/api/v1/graph", graphRouter);
+app.use("/api/v1/agent", AgentRouter);
 
 // Handling the unhandled routes
 app.all("*", (req, res, next) => {
