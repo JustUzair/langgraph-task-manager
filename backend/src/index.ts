@@ -83,3 +83,5 @@ process.on("SIGTERM", () => {
     console.log("Process Terminated");
   });
 });
+
+export default app;
