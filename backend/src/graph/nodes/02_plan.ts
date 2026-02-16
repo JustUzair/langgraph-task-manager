@@ -9,7 +9,7 @@ const PlanSchema = z.object({
       z
         .string()
         .min(3, "Keep each step a short sentence")
-        .max(150, "Keep each step concise")
+        .max(150, "Keep each step concise"),
     )
     .min(1)
     .max(10),
@@ -26,8 +26,8 @@ const System = [
 function userPrompt(input: string) {
   return [
     `User Goal: "${input}"`,
-    "Draft a small plan with 3-5 steps",
-    "Each step should be a short, clear and to-the-point sentence",
+    "Draft a small plan with 5-10 steps as needed",
+    "Each step should be clear and to-the-point sentence, you can expand or elaborate if needed.",
   ].join("\n");
 }
 
@@ -49,7 +49,7 @@ export async function PlanNode(state: State): Promise<Partial<State>> {
     },
   ]);
 
-  const steps = takeFirstN(plan.steps, 5);
+  const steps = takeFirstN(plan.steps, 10);
   return {
     steps,
     status: "planned",
