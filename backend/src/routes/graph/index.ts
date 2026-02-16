@@ -1,5 +1,8 @@
 import express from "express";
+import graphController from "../../controllers/graph";
 
-const graphRouter = express.Router();
+const router = express.Router();
 
-export default graphRouter;
+router.post("/", graphController.startGraph);
+router.post("/approve", graphController.resumeGraph);
+export default router;
