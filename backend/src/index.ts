@@ -4,8 +4,8 @@ import AgentRouter from "./routes/graph";
 import cors from "cors";
 
 const limiter = rateLimit({
-  limit: 100,
-  windowMs: 60 * 60 * 1000, // 1 hour
+  limit: 10,
+  windowMs: 10 * 60 * 1000, // 10 mins
   message: "Too many requests from this IP, please try again in an hour",
   handler: (req, res) => {
     res.status(429).json({
@@ -23,7 +23,7 @@ const limiter = rateLimit({
 
 // 🛜 Initializing the Server
 const app = express();
-app.enable("trust proxy");
+// app.enable("trust proxy");
 app.use(
   cors({
     origin: process.env.FRONTEND_ORIGIN || "http://localhost:3000",
