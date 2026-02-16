@@ -45,7 +45,7 @@ Refer to the following doc: https://docs.langchain.com/oss/javascript/langgraph/
 */
 const checkpointer = new MemorySaver();
 
-const graph = await builder.compile({
+const graph = builder.compile({
   checkpointer,
 });
 
@@ -55,7 +55,7 @@ function createThreadId() {
     .slice(2, 8)}`;
 }
 
-export async function startAgent(input: string): Promise<
+export async function runStartAgent(input: string): Promise<
   | {
       interrupt: {
         threadId: string;
@@ -91,7 +91,7 @@ export async function startAgent(input: string): Promise<
   };
 }
 
-export async function resumeAgent(args: {
+export async function runResumeAgent(args: {
   threadId: string;
   approve: boolean;
 }): Promise<State> {
