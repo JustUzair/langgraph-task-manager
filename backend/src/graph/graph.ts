@@ -11,7 +11,6 @@ import { PlanNode } from "./nodes/02_plan";
 import { ApproveNode } from "./nodes/03_approve";
 import { ExecuteNode } from "./nodes/04_execute";
 import { FinalizeNode } from "./nodes/05_finalize";
-import { MongoDBSaver } from "@langchain/langgraph-checkpoint-mongodb";
 import { makeInitialState, State } from "./types";
 
 const StateAnnotation = Annotation.Root({
