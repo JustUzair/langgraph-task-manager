@@ -1,8 +1,9 @@
+import { interrupt } from "@langchain/langgraph";
 import type { State } from "../types";
 
 export async function ApproveNode(
   state: State,
-  context: any
+  context: any,
 ): Promise<Partial<State>> {
   if (state.status == "cancelled") return {};
   const steps = state.steps ?? [];
@@ -11,9 +12,10 @@ export async function ApproveNode(
       approved: true,
       message: "No steps to approve, proceeding...",
     };
-  const interrupt = context?.interrupt as (
-    payload: unknown
-  ) => Promise<unknown>;
+  // Interrupt from LangGraph runtime
+  //   const interrupt = context?.interrupt as (
+  //     payload: unknown,
+  //   ) => Promise<unknown>;
   const decision = await interrupt({
     type: "approval_request",
     steps,

@@ -72,7 +72,7 @@ export async function runStartAgent(input: string): Promise<
   };
 
   const result: any = await graph.invoke(makeInitialState(input), config);
-  console.log(result.__interrupt__);
+  console.log(`Interrupt:`, result.__interrupt__);
   if (result && result.__interrupt__) {
     const first = Array.isArray(result.__interrupt__)
       ? result.__interrupt__[0]
