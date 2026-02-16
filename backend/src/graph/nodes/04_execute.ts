@@ -8,7 +8,7 @@ const NotesSchema = z.object({
 
 type Notes = z.infer<typeof NotesSchema>;
 
-function createHUmanPromptContent(steps: string[]) {
+function createHumanPromptContent(steps: string[]) {
   const list = JSON.stringify(steps, null, 0);
   return [
     "you are a concise assistant.",
@@ -34,7 +34,7 @@ export async function ExecuteNode(state: State): Promise<Partial<State>> {
     },
     {
       role: "human",
-      content: createHUmanPromptContent(steps),
+      content: createHumanPromptContent(steps),
     },
   ]);
 
@@ -46,7 +46,7 @@ export async function ExecuteNode(state: State): Promise<Partial<State>> {
     (_, i) => ({
       step: steps[i],
       note: out.notes[i],
-    })
+    }),
   );
   return {
     results,

@@ -1,4 +1,3 @@
-import { ExecutionStatus } from "./types";
 import { z } from "zod";
 
 export const ExecutionStatus = z.enum(["planned", "done", "cancelled"]);
